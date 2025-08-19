@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar';
+import { AuthService } from './auth/services/auth';
+import { CommonModule } from '@angular/common';
+import { AuthModule } from './auth/auth-module';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
+  standalone: true,
+  imports: [RouterOutlet, NavbarComponent, CommonModule, AuthModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
-export class App {
-  protected title = 'micro-front';
+export class App implements OnInit {
+  title = 'micro-front';
+  public authenticated = false;
+
+  constructor(private readonly authService: AuthService) {}
+
+  public ngOnInit() {
+    this.authenticated = this.authService.isAuthenticated();
+  }
 }
