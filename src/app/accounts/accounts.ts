@@ -16,7 +16,7 @@ export class AccountsComponent implements OnInit{
   constructor(private http: HttpClient) {
   }
   ngOnInit() {
-    this.http.get("http://localhost:8888/ACCOUNT-SERVICE/accounts")
+    this.http.get("/gateway/ACCOUNT-SERVICE/accounts")
       .subscribe({
         next : data => {
           this.accounts = data;
